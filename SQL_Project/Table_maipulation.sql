@@ -51,3 +51,5 @@ ALTER TABLE job_applied
 drop COLUMN contact_name;
 
 drop Table job_applied;
+
+SELECT * FROM job_applied_new;
