@@ -40,3 +40,9 @@ WHERE job_id = 4;
 UPDATE job_applied
 SET contact = 'someone5'
 WHERE job_id = 5;
+
+ALTER Table job_applied
+RENAME COLUMN contact to contact_name;
+
+alter Table job_applied
+alter COLUMN contact_name TYPE Text;
