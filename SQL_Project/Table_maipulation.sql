@@ -49,3 +49,5 @@ alter COLUMN contact_name TYPE Text;
 
 ALTER TABLE job_applied
 drop COLUMN contact_name;
+
+drop Table job_applied;
