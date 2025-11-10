@@ -39,6 +39,22 @@ WHERE
 with company_job_count AS
 (
 select 
+    company_id,COUNT(*)
+from 
+    job_postings_fact
+GROUP BY 
+    company_id
+)
+
+select cd.name as company_name, cjc.count as total_jobs
+from company_dim cd
+left JOIN company_job_count cjc on cjc.company_id = cd.company_id
+order by total_jobs DESC;
+
+---DA in chennnai
+with company_job_count AS
+(
+select 
     company_id,COUNT(*),job_location
 from 
     job_postings_fact
