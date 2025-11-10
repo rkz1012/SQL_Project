@@ -31,3 +31,21 @@ WHERE
       job_no_degree_mention = TRUE
       ORDER BY company_id
   );
+
+
+
+  ---CTE example
+
+with company_job_count AS
+(
+select 
+    company_id,COUNT(*)
+from 
+    job_postings_fact
+GROUP BY 
+    company_id
+)
+
+select name
+from company_dim cd
+left JOIN company_job_count cjc on cjc.company_id = cd.company_id;
