@@ -29,4 +29,5 @@ WHERE
       job_postings_fact
     WHERE
       job_no_degree_mention = TRUE
+      ORDER BY company_id
   );
