@@ -23,7 +23,8 @@ FROM
     job_postings_fact
 WHERE
     salary_year_avg is not NULL AND job_title_short = 'Data Analyst';
-ORDER BY salary_category;
+ORDER BY salary_category DESC;
+
 
 
 select * from job_postings_fact where
