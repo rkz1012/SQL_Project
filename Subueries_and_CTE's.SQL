@@ -46,6 +46,6 @@ GROUP BY
     company_id
 )
 
-select name
+select cd.name as company_name, cjc.count as total_jobs
 from company_dim cd
 left JOIN company_job_count cjc on cjc.company_id = cd.company_id;
