@@ -69,3 +69,32 @@ from company_dim cd
 left JOIN company_job_count cjc on cjc.company_id = cd.company_id 
 where cjc.count IS NOT NULL and cjc.job_location like '%Chennai%'
 order by total_jobs DESC;
+
+--- problem1
+---Determine the size category ('Small', 'Medium', or 'Large') for each company by first identifying the number of job postings they have. Use a subquery to calculate the total job postings per company. A company is considered 'Small' if it has less than 10 job postings, 'Medium' if the number of job postings is between 10 and 50, and 'Large' if it has more than 50 job postings. Implement a subquery to aggregate job counts per company before classifying them based on size.
+
+
+SELECT
+    cd.name AS company_name, -- Added company name
+    company_counts.total_jobs,
+    CASE
+        WHEN company_counts.total_jobs < 10 THEN 'Small'
+        WHEN company_counts.total_jobs BETWEEN 10 AND 50 THEN 'Medium'
+        WHEN company_counts.total_jobs > 50 THEN 'Large'
+        ELSE 'Unknown'
+    END AS company_size_category
+FROM
+    company_dim AS cd -- Start with the company dimension table
+INNER JOIN
+    (
+        -- Subquery: Calculate the total job postings per company
+        SELECT
+            company_id,
+            COUNT(job_id) AS total_jobs
+        FROM
+            job_postings_fact
+        GROUP BY
+            company_id
+    ) AS company_counts ON cd.company_id = company_counts.company_id -- Join on company_id
+ORDER BY
+    company_counts.total_jobs DESC;
