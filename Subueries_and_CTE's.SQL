@@ -98,3 +98,23 @@ INNER JOIN
     ) AS company_counts ON cd.company_id = company_counts.company_id -- Join on company_id
 ORDER BY
     company_counts.total_jobs DESC;
+
+--- practice problem
+with remote_job_skills AS
+(
+select 
+    skill_id,count(*)as skill_count
+FROM
+    skills_job_dim as skills_to_job
+INNER JOIN job_postings_fact as job_postings on job_postings.job_id = skills_to_job.job_id
+WHERE
+    job_postings.job_work_from_home = TRUE
+GROUP BY
+    skill_id
+)
+
+select skill.skill_id,skills as skill_name,skill_count
+from remote_job_skills
+INNER JOIN skills_dim  as skill on skill.skill_id = remote_job_skills.skill_id
+ORDER BY skill_count DESC
+limit 5;
