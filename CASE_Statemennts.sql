@@ -11,7 +11,7 @@ GROUP BY location_category;
 
 --problem
 
-select job_id, job_title, job_location,
+select job_id, job_title, job_location,salary_year_avg,
     CASE
         When salary_year_avg > 250000 THEN 'High Salary'
         WHEN salary_year_avg BETWEEN 100000 AND 250000 THEN 'Standard Salary'
@@ -22,8 +22,8 @@ select job_id, job_title, job_location,
 FROM
     job_postings_fact
 WHERE
-    salary_year_avg is not NULL AND job_title_short = 'Data Analyst';
-ORDER BY salary_category DESC;
+    (salary_year_avg is not NULL) AND job_title_short = 'Data Analyst' 
+ORDER BY salary_year_avg DESC;
 
 
 
