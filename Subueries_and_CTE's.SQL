@@ -108,7 +108,7 @@ FROM
     skills_job_dim as skills_to_job
 INNER JOIN job_postings_fact as job_postings on job_postings.job_id = skills_to_job.job_id
 WHERE
-    job_postings.job_work_from_home = TRUE
+    job_postings.job_work_from_home = TRUE AND job_postings.job_title_short = 'Data Analyst'
 GROUP BY
     skill_id
 )
