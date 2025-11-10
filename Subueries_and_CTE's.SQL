@@ -39,13 +39,17 @@ WHERE
 with company_job_count AS
 (
 select 
-    company_id,COUNT(*)
+    company_id,COUNT(*),job_location
 from 
     job_postings_fact
 GROUP BY 
-    company_id
+    company_id,job_country,job_location
+HAVING
+    job_country = 'India' 
 )
 
-select cd.name as company_name, cjc.count as total_jobs
+select cd.name as company_name, cjc.count as total_jobs, cjc.job_location
 from company_dim cd
-left JOIN company_job_count cjc on cjc.company_id = cd.company_id;
+left JOIN company_job_count cjc on cjc.company_id = cd.company_id 
+where cjc.count IS NOT NULL and cjc.job_location like '%Chennai%'
+order by total_jobs DESC;
