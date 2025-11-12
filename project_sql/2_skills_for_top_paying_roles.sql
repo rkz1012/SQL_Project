@@ -30,3 +30,21 @@ SELECT
 FROM top_paying_jobs
 INNER JOIN skills_job_dim on top_paying_jobs.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim on skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY
+    top_paying_jobs.salary_year_avg DESC;
+
+
+/*
+📈 Top 10 Most Required Skills
+The chart below visualizes the frequency of the top 10 skills.
+
+The analysis reveals the following hierarchy of skills for securing a top-paying Data Analyst role:
+
+SQL (Structured Query Language) is the most required skill, appearing in 8 out of 8 unique job postings. This confirms that advanced database querying is the foundation of any high-paid data role.
+
+Python follows closely, indicating that these roles require more than basic analysis, involving advanced data manipulation, statistics, or machine learning (often facilitated by the Python library Pandas, which is also on the list).
+
+Tableau is the leading visualization tool, required in nearly every job, emphasizing the critical need for strong data storytelling and reporting skills.
+
+Cloud and Data Warehousing Tools like AWS (Amazon Web Services) and Snowflake are essential, showing that top-paying roles operate on modern, scalable data infrastructure.
+*/
